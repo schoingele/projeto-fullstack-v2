@@ -1,0 +1,50 @@
+{
+  "name": "backend-cursos",
+  "version": "1.0.0",
+  "description": "Backend RESTful para gestão de cursos com Postgres e JWT",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "jest --runInBand --detectOpenHandles",
+    "test:ci": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles",
+  "postinstall": "node scripts/apply-patches.js",
+    "docker:build": "docker build -t backend-cursos .",
+    "docker:up": "docker-compose up -d",
+    "seed": "ts-node src/seeds/seed.ts"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.10.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.14",
+    "validator": "file:vendor/validator"
+  },
+  "overrides": {
+    "validator": "file:vendor/validator"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.2",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "^20.2.5",
+    "@types/supertest": "^6.0.3",
+    "jest": "^29.6.1",
+    "sqlite3": "^5.1.7",
+    "supertest": "^6.3.4",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.1.6"
+  }
+}
