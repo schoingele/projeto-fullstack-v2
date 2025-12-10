@@ -10,8 +10,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  // Token auth temporarily disabled for local testing.
-  // If you want to enable authentication, uncomment the lines below.
+
   // const token = localStorage.getItem("token");
   // if (token) config.headers["Authorization"] = `Bearer ${token}`;
   return config;

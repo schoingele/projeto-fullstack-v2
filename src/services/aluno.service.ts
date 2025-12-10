@@ -1,16 +1,19 @@
 import { AppDataSource } from '../../ormconfig';
 import { Aluno } from "../entities/Aluno";
 import { Curso } from "../entities/Curso";
+import bcrypt from 'bcrypt';
 
 export class AlunoService {
   private repo = AppDataSource.getRepository(Aluno);
   private cursoRepo = AppDataSource.getRepository(Curso);
 
   async create(data: any) {
+    const hashedPassword = await bcrypt.hash(data.senha, 10);
+    
     const aluno = this.repo.create({
       nome: data.nome,
       email: data.email,
-      senha: data.senha,
+      senha: hashedPassword,
       telefone: data.telefone,
       data_nascimento: data.data_nascimento
     });
