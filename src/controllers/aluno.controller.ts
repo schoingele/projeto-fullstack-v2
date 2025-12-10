@@ -6,6 +6,10 @@ export async function criarAluno(req: Request, res: Response) {
     const criado = await alunoService.create(req.body);
     return res.status(201).json(criado);
   } catch (err: any) {
+    // Tratamento específico para email duplicado ou erro de constraint do banco
+    if (err && (err.code === 'EMAIL_DUPLICADO' || err.code === '23505')) {
+      return res.status(409).json({ message: err.message || 'Email já cadastrado' });
+    }
     return res.status(400).json({ message: err.message || "Erro ao criar aluno" });
   }
 }

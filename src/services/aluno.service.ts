@@ -8,8 +8,18 @@ export class AlunoService {
   private cursoRepo = AppDataSource.getRepository(Curso);
 
   async create(data: any) {
+    // Verifica se o email já existe para evitar violação de constraint
+    if (data.email) {
+      const existing = await this.repo.findOne({ where: { email: data.email } });
+      if (existing) {
+        const err: any = new Error('Email já cadastrado');
+        err.code = 'EMAIL_DUPLICADO';
+        throw err;
+      }
+    }
+
     const hashedPassword = await bcrypt.hash(data.senha, 10);
-    
+
     const aluno = this.repo.create({
       nome: data.nome,
       email: data.email,

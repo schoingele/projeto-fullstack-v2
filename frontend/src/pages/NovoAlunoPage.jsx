@@ -20,7 +20,13 @@ export default function NovoAlunoPage() {
 
     api.post("/alunos", form)
       .then(() => alert("Aluno cadastrado com sucesso!"))
-      .catch((err) => alert("Erro ao cadastrar: " + err));
+      .catch((err) => {
+        // Mostrar status e corpo da resposta quando disponível
+        const status = err.response && err.response.status;
+        const data = err.response && err.response.data ? err.response.data : err.message;
+        alert(`Erro ao cadastrar: ${status ? status + ' - ' : ''}${typeof data === 'string' ? data : JSON.stringify(data)}`);
+        console.error('Erro ao cadastrar aluno:', err);
+      });
   }
 
   return (
