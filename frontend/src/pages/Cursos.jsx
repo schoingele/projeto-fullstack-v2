@@ -7,13 +7,13 @@ export default function CursosPage() {
   const [alunosCurso, setAlunosCurso] = useState([]);
 
   useEffect(() => {
-    api.get("/curso")
+    api.get("/cursos")
       .then((res) => setCursos(res.data))
       .catch((err) => console.log(err));
   }, []);
 
   function buscarAlunos(id) {
-    api.get(`/curso/${id}/alunos`)
+    api.get(`/cursos/${id}/alunos`)
       .then((res) => setAlunosCurso(res.data))
       .catch((err) => console.log(err));
   }

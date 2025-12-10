@@ -6,7 +6,7 @@ export default function AlunosPage() {
   const [alunos, setAlunos] = useState([]);
 
   useEffect(() => {
-    api.get("/aluno")
+    api.get("/alunos")
       .then((res) => setAlunos(res.data))
       .catch((err) => console.log(err));
   }, []);
